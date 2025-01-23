@@ -3,7 +3,7 @@
 @section('header')
 <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>Data Absensi Karyawan</h1>
+      <h1>Data Jadwal</h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
@@ -17,7 +17,7 @@
     <div class="col">
         <div class="card">
             <div class="card-header">
-                <a href="/absensis/create" class="btn btn-primary">
+                <a href="/jadwals/create" class="btn btn-primary">
                     Tambah Data
                 </a>
             </div>
@@ -35,18 +35,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($absensis as $absensi)
+                        @foreach ($jadwals as $jadwal)
                         <tr class="text-center">
-                            <td>{{ $absensi->user_id }}</td>
-                            <td>{{ $absensi->bulan }}</td>
-                            <td>{{ $absensi->tanggal }}</td>
-                            <td>{{ $absensi->shift }}</td>
-                            <td>{{ $absensi->jam }}</td>
-                            <td>{{ $absensi->posisi }}</td>
+                            <td>{{ $jadwal->user_id }}</td>
+                            <td>{{ $jadwal->bulan }}</td>
+                            <td>{{ $jadwal->tanggal }}</td>
+                            <td>{{ $jadwal->shift }}</td>
+                            <td>{{ $jadwal->jam }}</td>
+                            <td>{{ $jadwal->posisi }}</td>
                             <td class="text-center">
                                 <div class="d-flex center-button">
-                                <a href="/absensis/edit/{{ $absensi->id }}" class="btn btn-sm btn-warning mr-2">Edit</a>
-                                <form action="/absensis/{{ $absensi->id }}" method="POST">
+                                <a href="/jadwals/edit/{{ $jadwal->id }}" class="btn btn-sm btn-warning mr-2">Edit</a>
+                                <form action="/jadwals/{{ $jadwal->id }}" method="POST">
                                     @csrf
                                     @method('UPDATE')
                                     @method('DELETE')

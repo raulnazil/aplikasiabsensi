@@ -3,46 +3,49 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Absensi;
+use App\Models\Jadwal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 
-class AbsensiController extends Controller
+class JadwalController extends Controller
 {
     public function index() {
-        $absensis = Absensi::with('absensis')->get();
-        return view('pages.absensis.index', ["absensis" => $absensis,]);
+        $jadwals = Jadwal::all();
+        return view('pages.jadwals.index', ["jadwals" => $jadwals,]);
     }
 
     public function dashboard() {
-        return view('pages.absensis.dashboard');
+        return view('pages.jadwals.dashboard');
     }
 
     public function create() {
-        $absensis = Absensi::all();
-        return view('pages.absensis.create', ["absensis" => $absensis,]);
+        $jadwals = Jadwal::all();
+        return view('pages.jadwals.create', ["jadwals" => $jadwals,]);
     }
 
     public function store(Request $request) {
 
-        Absensi::create([
+        Jadwal::create([
             "user_id" => $request->input('user_id'),
             "bulan"   => $request->input('bulan'),
             "tanggal" => $request->input('tanggal'),
             "shift"   => $request->input('shift'),
-            "jam"     => $request->input('jam'),
+            "jam"     => $request->input('jam'), // simpan waktu yang diformat dengan benar
             "posisi"  => $request->input('posisi'),
         ]);
 
-        return redirect('/absensis');
+        Alert::success('Berhasil!', 'Data jadwal berhasil disimpan.');
+        return redirect('/jadwals');
     }
 
     public function edit($id) {
-        // Ambil data absensi berdasarkan ID
-        $absensi = Absensi::findOrFail($id);
+        // Ambil data jadwal berdasarkan ID
+        $jadwals = Jadwal::findOrFail($id);
 
         // Kirim data ke view
-        return view('pages.absensis.edit', ["absensi" => $absensi]);
+        return view('pages.jadwals.edit', ["jadwal" => $jadwals]);
     }
 
     public function update(Request $request, $id) {
@@ -52,15 +55,16 @@ class AbsensiController extends Controller
             "bulan"   => 'required|date',
             "tanggal" => 'required|date',
             "shift"   => 'required|string',
-            "jam"     => 'required|date_format:H:i',
+            "jam"     => 'required|date_format:H:i', // menggunakan format H:i:s
             "posisi"  => 'required|string',
         ]);
 
         // Temukan data absensi berdasarkan ID
-        $absensi = Absensi::findOrFail($id);
+        $Jadwal = Jadwal::findOrFail($id);
+
 
         // Update data absensi
-        $absensi->update([
+        $Jadwal->update([
             "user_id" => $request->input('user_id'),
             "bulan"   => $request->input('bulan'),
             "tanggal" => $request->input('tanggal'),
@@ -69,18 +73,20 @@ class AbsensiController extends Controller
             "posisi"  => $request->input('posisi'),
         ]);
 
-        // Redirect ke halaman absensis dengan pesan sukses
-        return redirect('/absensis')->with('success', 'Data absensi berhasil diperbarui.');
+
+        Alert::success('Berhasil!', 'Data jadwal berhasil diperbarui.');
+        // Redirect ke halaman jadwals dengan pesan sukses
+        return redirect('/jadwals');
     }
 
 
 
 
     public function delete($id) {
-        $absensis = Absensi::findOrFail($id);
-        $absensis->delete();
-
-        return redirect('/absensis');
+        $jadwals = Jadwal::findOrFail($id);
+        $jadwals->delete();
+        Alert::success('Berhasil!', 'Data jadwal berhasil dihapus.');
+        return redirect('/jadwals');
     }
 }
 

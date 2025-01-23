@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aplikasi CheckPoint</title>
-
+   <!-- Tambahkan resource CSS SweetAlert -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -38,6 +39,8 @@
       </div>
     </section>
     <!-- /.content -->
+     <!-- Tambahkan SweetAlert directive -->
+     @include('sweetalert::alert')
 
     <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
         <i class="fas fa-chevron-up"></i>
@@ -47,9 +50,8 @@
 
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
     </div>
-    <strong>Copyright &copy; 2024 <a href="https://adminlte.io">Checkpoint</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2024 <a href="#">Checkpoint</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
@@ -68,5 +70,7 @@
 <script src="{{ asset('templates/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('templates/dist/js/demo.js') }}"></script>
+ <!-- Tambahkan resource JS SweetAlert -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

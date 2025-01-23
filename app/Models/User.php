@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'posisi_id',
     ];
 
     /**
@@ -41,4 +43,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relasi ke model Posisi.
+     */
+
+    public function posisi()
+    {
+        return $this->belongsTo(Posisi::class, 'posisi_id');
+    }
 }
